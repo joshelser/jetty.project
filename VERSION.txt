@@ -464,7 +464,6 @@ jetty-9.3.14.v20161028 - 28 October 2016
    ${jetty.base}
  + 1039 AttributeNormalizer should not track attributes that are null
  + 1046 Improve HTTP2Flusher error report
- + 480764 Add extra tests for empty multipart
 
 jetty-9.4.0.RC1 - 21 October 2016
  + 277 Proxy servlet does not handle HTTP status 100 correctly
@@ -585,7 +584,6 @@ jetty-9.3.12.v20160915 - 15 September 2016
  + 826 Better default for HTTP/2's max concurrent streams
  + 827 HTTPClient fails connecting to HTTPS host through an HTTP proxy
    w/authentication
- + 830 Test webapp not properly copied to demo-base
  + 832 ServerWithJNDI example uses wrong webapp
  + 841 support reset in buffering interceptors
  + 844 Implement a Thread Limit Handler
@@ -706,7 +704,6 @@ jetty-9.4.0.M1 - 15 August 2016
  + 826 Better default for HTTP/2's max concurrent streams
  + 827 HTTPClient fails connecting to HTTPS host through an HTTP proxy
    w/authentication
- + 830 Test webapp not properly copied to demo-base
  + 832 ServerWithJNDI example uses wrong webapp
  + 837 Update to support apache jasper 8.5.4
  + 841 support reset in buffering interceptors
@@ -765,7 +762,6 @@ jetty-9.3.11.v20160721 - 21 July 2016
 
 jetty-9.2.19.v20160908 - 08 September 2016
  + 817 NPE in jndi Resource
- + 830 Test webapp not properly copied to demo-base
  + 832 ServerWithJNDI example uses wrong webapp
  + 851 MBeanContainer no longer unregisters MBeans when "stopped"
  + 868 ClassLoader leak with Jetty and Karaf - static instances of
@@ -798,6 +794,8 @@ jetty-9.3.10.v20160621 - 21 June 2016
  + 605 Guard concurrent calls to WebSocketSession.close()
  + 608 reset encoding set from content type?
  + 620 Missing call to setPattern in RewritePatternRule constructor
+ + 622 NoSqlSessionManager test for expired session does not use
+   session.maxInactiveInterval
  + 623 Add --gzip suffix to 304 responses with ETAGs
  + 624 AsyncContext.onCompleted called twice
  + 628 IOException: Unable to open root Jar file
@@ -981,6 +979,7 @@ jetty-9.3.9.M1 - 11 April 2016
  + 476 HttpClient should not send absolute-form target with non HttpProxy
 
 jetty-9.3.8.v20160314 - 14 March 2016
+ + 107 ResourceHandler range support
  + 124 Don't produce text/html if the request doesn't accept it
  + 247 improving invalid buffer manipulation exception messages
  + 258 Http request to origin server over https proxy contains absolute URL
@@ -1421,6 +1420,7 @@ jetty-9.3.0.v20150612 - 12 June 2015
  + 452503 Start.jar --add-to-start=jstl results in GraphException: Unable to
    expand property in name: jsp-impl/${jsp-impl}-jstl
  + 453487 Recycle HttpChannelOverHTTP2
+ + 453627 Fixed FileSystem test for nanosecond filesystems
  + 453829 Added HeaderRegexRule
  + 453834 CDI Support for WebSocket
  + 454152 Remove mux remnants from WebSocketClient
@@ -1431,6 +1431,7 @@ jetty-9.3.0.v20150612 - 12 June 2015
  + 456956 Reduce ThreadLocal.remove() weak reference garbage
  + 457130 HTTPS request with IP host and HTTP proxy throws
    IllegalArgumentException.
+ + 457309 Add test to ensure GET and HEAD response headers same for gzip
  + 457508 Add flag to scan exploded jars in jetty-jspc-maven-plugin
  + 457788 Powered By in o.e.j.util.Jetty conditional on sendServerVersion
  + 458478 JarFileResource improve performance of exist method
@@ -1552,7 +1553,6 @@ jetty-9.2.11.v20150529 - 29 May 2015
  + 465700 NullPointerException in ResourceHandler with welcome files
  + 465734 DosFilter whitelist bit pattern fix
  + 465747 Jetty is failing to process all HTTP OPTIONS requests
- + 466329 Fixed local only TestFilter
  + 467276 NPE protection in SslContextFactory
  + 467603 Response 401 from server hangs client
  + 467936 w Check HttpOutput aggregateSize is < bufferSize
@@ -1659,7 +1659,6 @@ jetty-9.3.0.RC0 - 12 May 2015
  + 466005 Use Files.move(src,trgt) instead of File.rename for
    Part.write(filename)
  + 466283 Support specifying ALPN protocols in HTTP2Client
- + 466329 Fixed local only TestFilter
  + 466618 Partial WebSocket Text delivery does not like incomplete UTF8
    sequences
  + 466619 Add WebSocketFrameListener for receiving WebSocket Frame information
@@ -1706,7 +1705,6 @@ jetty-9.3.0.M2 - 11 March 2015
  + 450483 Missing parameterization of etc/jetty-deploy.xml
  + 450484 Missing parameterization of etc/jetty-http[s].xml
  + 450855 GzipFilter MIGHT_COMPRESS exception
- + 450873 Disable tests that downcaste wrapped GzipFilterResponses
  + 450894 jetty.sh does not delete JETTY_STATE at start
  + 451092 Connector will fail if HeaderListener return false
  + 451529 Change sentinel class for finding jstl on classpath to
@@ -1732,8 +1730,6 @@ jetty-9.3.0.M2 - 11 March 2015
    minThreads=0.
  + 453487 Recycle HttpChannelOverHTTP2
  + 453627 Fixed FileSystem test for nanosecond filesystems
- + 453629 Fixed big write test
- + 453636 Improved spin detection on test
  + 453793 _maxHeaderBytes>0 is not verified in parseNext() when in
    State.CLOSED.
  + 453801 Jetty does not check for already registered services when
@@ -1750,7 +1746,6 @@ jetty-9.3.0.M2 - 11 March 2015
    classpath and close the class inputstream when done scanning it
  + 454983 Source bundles should not be singleton
  + 455047 Update JASPI
- + 455174 jetty-plus JNDI tests should use unique JNDI paths
  + 455330 Multiple Jetty-ContextFilePath entries separated by commas doesn't
    work
  + 455436 ProxyServlet sends two User-Agent values
@@ -1771,7 +1766,6 @@ jetty-9.3.0.M2 - 11 March 2015
    IllegalArgumentException.
  + 457696 JMX implementation should not be overridden by WebApp classes
  + 457893 Close temp jar resource
- + 458101 added test for maxFormContentSize
  + 458140 Added DispatcherType support to RewriteHandler
  + 458174 Example Jar Server
  + 458175 multipart annotation on lazily loaded servlet does not work
@@ -1857,7 +1851,6 @@ jetty-9.2.8.v20150217 - 17 February 2015
  + 451092 Connector will fail if HeaderListener return false
  + 455436 ProxyServlet sends two User-Agent values
  + 457893 Close temp jar resource
- + 458101 added test for maxFormContentSize
  + 458174 Example Jar Server
  + 458175 multipart annotation on lazily loaded servlet does not work
  + 458209 Length check for HttpMethod MOVE lookahead
@@ -1892,7 +1885,6 @@ jetty-9.2.7.v20150116 - 16 January 2015
    classpath and close the class inputstream when done scanning it
  + 454983 Source bundles should not be singleton
  + 455047 Update JASPI
- + 455174 jetty-plus JNDI tests should use unique JNDI paths
  + 455330 Multiple Jetty-ContextFilePath entries separated by commas doesn't
    work
  + 455476 Persist updated session expiry time for MongoSessionManager
@@ -1925,7 +1917,6 @@ jetty-9.2.6.v20141205 - 05 December 2014
  + 452516 Make HttpOutput aggregation size configurable
  + 453386 Jetty not working when configuring QueuedThreadPool with
    minThreads=0.
- + 453629 Fixed big write test
  + 453793 _maxHeaderBytes>0 is not verified in parseNext() when in
    State.CLOSED.
  + 453801 Jetty does not check for already registered services when
@@ -1940,7 +1931,6 @@ jetty-9.2.5.v20141112 - 12 November 2014
  + 450483 Missing parameterization of etc/jetty-deploy.xml
  + 450484 Missing parameterization of etc/jetty-http[s].xml
  + 450855 GzipFilter MIGHT_COMPRESS exception
- + 450873 Disable tests that downcaste wrapped GzipFilterResponses
  + 450894 jetty.sh does not delete JETTY_STATE at start
 
 jetty-9.3.0.M1 - 03 November 2014
@@ -1997,7 +1987,6 @@ jetty-9.3.0.M1 - 03 November 2014
    <classifier>tests</classifier>
  + 447216 putAll Properties in XmlConfiguration
  + 447381 Disable SSLv3 by default
- + 447472 test harness for slow large writes
  + 447515 Remove GzipFilter
  + 447627 MultiPart file always created when "filename" set in
    Content-Disposition
@@ -2084,7 +2073,6 @@ jetty-9.2.4.v20141103 - 03 November 2014
  + 446923 SharedBlockingCallback does not handle connector max idle time of
    Long.MAX_VALUE; BlockerTimeoutException not serializable
  + 447381 Disable SSLv3 by default
- + 447472 test harness for slow large writes
  + 447515 Remove GzipFilter
  + 447627 MultiPart file always created when "filename" set in
    Content-Disposition
@@ -2212,8 +2200,6 @@ jetty-9.2.2.v20140723 - 23 July 2014
  + 437419 Allow scanning of META-INF for resources,fragments,tlds for unpacked
    jars
  + 437430 jettyXml not consistent between jetty:run and jetty:run-forked
- + 437462 consistent test failure in jetty-start under windows
- + 437706 ServletTester calls LocalConnector method with hardcoded timeout
  + 437800 URLs with single quote and spaces return 404
  + 437996 avoid async status race by not setting 200 on handled
  + 438079 Review garbage creation in 9.2.x series
@@ -2313,8 +2299,6 @@ jetty-9.2.0.RC0 - 15 May 2014
 jetty-9.2.0.M1 - 08 May 2014
  + 367680 jsp-file with load-on-startup not precompiled
  + 404511 removed deprecated StringMap
- + 409105 Upgrade jetty-osgi build/test to use more recent pax junit test
-   framework
  + 424982 improved PID check in jetty.sh
  + 425421 ContainerLifeCycle does not start added beans in started state
  + 428904 Add logging of which webapp has path with uncovered http methods
@@ -2362,7 +2346,6 @@ jetty-9.2.0.M1 - 08 May 2014
  + 434027 ReadListener.onError() not invoked in case of read failures
  + 434056 Support content consumed asynchronously
  + 434074 Avoid double dispatch by returning false from messageComplete
- + 434077 AnnotatedServerEndpointTest emits strange exception
  + 434247 Redirect loop in FastCGI proxying for HTTPS sites
 
 jetty-8.1.15.v20140411 - 11 April 2014
@@ -2407,7 +2390,6 @@ jetty-9.2.0.M0 - 09 April 2014
  + 431279 jetty-start / Unable to start jetty if no properties are defined
  + 431892 DefaultFileLocatorHelper.getBundleInstallLocation fails for equinox
    3.10
- + 432122 ignore frequently failing test
  + 432145 Pending request is not failed when HttpClient is stopped
  + 432270 Slow requests with response content delimited by EOF fail
 
@@ -2468,7 +2450,6 @@ jetty-9.1.4.v20140401 - 01 April 2014
    expire
  + 430341 add apache jsp and jstl optional modules
  + 430490 Added JETTY_SHELL 426738 Fixed JETTY_HOME comments
- + 430649 test form encoding
  + 430654 closing client connections can hang worker threads
  + 430808 OutputStreamContentProvider violates OutputStream contract
  + 430822 jetty-start / make soLingerTime configurable via property
@@ -2490,7 +2471,6 @@ jetty-9.1.3.v20140225 - 25 February 2014
  + 427738 fixed XSS in async-rest demo
  + 428157 Methods of anonymous inner classes can't be called via xml
  + 428232 Rework batch mode / buffering in websocket
- + 428238 Test HEAD request with async IO
  + 428266 HttpRequest mangles URI query string
  + 428383 limit white space between requests
  + 428418 JettyStopMojo prints some messages on System.err
@@ -2561,7 +2541,6 @@ jetty-9.1.1.v20140108 - 08 January 2014
  + 422388 Test for GzipFilter apply to resources with charset appended to the
    MIME type
  + 422398 moved jmx remote config to jmx-remote.mod
- + 422427 improved TestConnection
  + 422703 Support reentrant HttpChannel and HttpConnection
  + 422723 Dispatch failed callbacks to avoid blocking selector
  + 422734 messages per second in ConnectorStatistics
@@ -2594,7 +2573,6 @@ jetty-9.1.1.v20140108 - 08 January 2014
    not disconnected on server side
  + 423926 Remove code duplication in class IdleTimeout
  + 423930 SPDY streams are leaked
- + 423948 Cleanup and consolidate testing utilities in WebSocket
  + 424014 PathContentProvider does not close its internal SeekableByteChannel
  + 424043 IteratingCallback Idle race
  + 424051 Using --list-config can result in NPE
@@ -2643,7 +2621,6 @@ jetty-9.1.0.RC2 - 07 November 2013
  + 417223 removed deprecated ThreadPool.dispatch
  + 418741 Threadlocal cookie buffer in response
  + 420359 fixed thread warnings
- + 420572 IOTest explicitly uses 127.0.0.1
  + 420692 set soTimeout to try to avoid hang
  + 420844 Connection:close on exceptional errors
  + 420930 Use Charset to specify character encoding
@@ -2660,7 +2637,6 @@ jetty-9.0.7.v20131107 - 07 November 2013
    useTestScope=true
  + 418792 Session getProtocolVersion always returns null
  + 418892 SSL session caching so unreliable it effectively does not work
- + 419309 Added symlink checker to test webapp
  + 419333 treat // as an alias in path
  + 419344 NPNServerConnection does not close the EndPoint if it reads -1
  + 419350 Do not borrow space from passed arrays
@@ -2682,7 +2658,6 @@ jetty-9.0.7.v20131107 - 07 November 2013
  + 420362 Response/request listeners called too many times
  + 420374 Call super.close() in a finally block
  + 420530 AbstractLoginModule never fails a login
- + 420572 IOTest explicitly uses 127.0.0.1
  + 420776 complete error pages after startAsync
  + 420844 Connection:close on exceptional errors
  + 420930 Use Charset to specify character encoding
@@ -2719,7 +2694,6 @@ jetty-9.1.0.RC1 - 31 October 2013
  + 417356 Add SOCKS support to jetty client
  + 417932 resources.mod should make ${jetty.base}/resources/ directory
  + 417933 logging.mod ini template should include commented log.class settings
- + 418212 org.eclipse.jetty.spdy.server.http.SSLExternalServerTest hangs
  + 418441 Use of OPTIONS= in Jetty 9.1 should display WARNING message
  + 418596 Faults in JARs during class scanning should report the jar that
    caused the problem
@@ -2737,7 +2711,6 @@ jetty-9.1.0.RC1 - 31 October 2013
  + 418922 Missing parameterization of etc/jetty-xinetd.xml
  + 418923 Missing parameterization of etc/jetty-proxy.xml
  + 419146 Parameterize etc/jetty-requestlog.xml values
- + 419309 Added symlink checker to test webapp
  + 419330 Allow access to setters on jetty-jspc-maven-plugin
  + 419333 treat // as an alias in path
  + 419344 NPNServerConnection does not close the EndPoint if it reads -1
@@ -2767,14 +2740,12 @@ jetty-9.1.0.RC1 - 31 October 2013
  + 420364 Bad synchronization in HttpConversation
  + 420374 Call super.close() in a finally block
  + 420530 AbstractLoginModule never fails a login
- + 420687 XML errors in jetty-plus/src/test/resources/web-fragment-*.xml
  + 420776 complete error pages after startAsync
 
 jetty-9.1.0.RC0 - 30 September 2013
  + 412469 make module for jetty-jaspi
  + 416453 Add comments to embedded SplitFileServer example
  + 416577 enhanced shutdown handler to send shutdown at startup
- + 416674 run all jetty-ant tests on random ports
  + 416940 avoid download of spring-beans.dtd
  + 417152 WebSocket / Do all setup in websocket specific
    ServletContainerInitializer
@@ -2794,7 +2765,6 @@ jetty-9.1.0.RC0 - 30 September 2013
  + 417938 Startup / Sort properties presented in --list-config alphabetically
  + 418014 Handle NTFS canonical exceptions during alias check
  + 418068 WebSocketClient has lazy or injected Executor
- + 418212 org.eclipse.jetty.spdy.server.http.SSLExternalServerTest hangs
  + 418227 Null cookie value test
 
 jetty-9.0.6.v20130930 - 30 September 2013
@@ -2802,7 +2772,6 @@ jetty-9.0.6.v20130930 - 30 September 2013
  + 411934 War overlay configuration assumes src/main/webapp exists
  + 413484 setAttribute in nosql session management better handles _dirty status
  + 413684 deprecated unsafe alias checkers
- + 413737 hide stacktrace in ReferrerPushStrategyTest
  + 414431 Avoid debug NPE race
  + 414898 Only upgrade v0 to v1 cookies on dquote , ; backslash space and tab
    in the value
@@ -2811,8 +2780,6 @@ jetty-9.0.6.v20130930 - 30 September 2013
  + 415302 
  + 415330 Avoid multiple callbacks at EOF
  + 415401 Add initalizeDefaults call to SpringConfigurationProcessor
- + 415548 migrate ProxyHTTPToSPDYTest to use HttpClient to avoid intermittent
-   NPE part 2
  + 415605 fix status code logging for async requests
  + 415999 Fix some of FindBugs warnings
  + 416015 Handle null Accept-Language and other headers
@@ -2835,7 +2802,6 @@ jetty-9.0.6.v20130930 - 30 September 2013
  + 416597 Allow classes and jars on the webappcontext extraclasspath to be
    scanned for annotations
  + 416663 Content-length set by resourcehandler
- + 416674 run all jetty-ant tests on random ports
  + 416679 Change warning to debug if no transaction manager present
  + 416787 StringIndexOutOfBounds with a pathMap of ""
  + 416940 avoid download of spring-beans.dtd
@@ -2850,7 +2816,6 @@ jetty-9.0.6.v20130930 - 30 September 2013
    <waitForChild>true</waitForChild>
  + 417831 Remove jetty-logging.properties from distro/resources
  + 418014 Handle NTFS canonical exceptions during alias check
- + 418212 org.eclipse.jetty.spdy.server.http.SSLExternalServerTest hangs
  + 418227 Null cookie value test
 
 jetty-9.1.0.M0 - 16 September 2013
@@ -2883,7 +2848,6 @@ jetty-9.1.0.M0 - 16 September 2013
    defaulting to security-role if no matching ref
  + 405944 Check annotation and resource injection is supported for
    AsyncListener
- + 406759 supressed stacktrace in ReferrerPushStrategyTest
  + 407708 HttpUpgradeHandler must support injection
  + 408782 Transparent Proxy - rewrite URL is ignoring query strings
  + 408904 Enhance CommandlineBuilder to not escape strings inside single quotes
@@ -2895,18 +2859,14 @@ jetty-9.1.0.M0 - 16 September 2013
    ResourceCache to avoid using inefficent path in BufferUtil.writeTo
  + 410083 Jetty clients submits incomplete URL to proxy
  + 410098 inject accept-encoding header for all http requests through SPDY as
-   SPDY clients MUST support spdy. Also remove two new tests that have been to
-   implementation agnostic and not needed anymore due to recent code changes
+   SPDY clients MUST support spdy. 
  + 410246 HttpClient with proxy does not tunnel HTTPS requests
- + 410341 suppress stacktraces that happen during test setup shutdown after
-   successful test run
  + 410800 Make RewritePatternRule queryString aware
  + 411069 better set compiler defaults to 1.7, including webdefault.xml for jsp
  + 411934 War overlay configuration assumes src/main/webapp exists
  + 412205 SSL handshake failure leads to unresponsive UpgradeConnection
  + 412418 HttpTransportOverSPDY fix race condition while sending push streams
-   that could cause push data not to be sent. Fixes intermittent test issues in
-   ReferrerPushStrategyTest
+   that could cause push data not to be sent.
  + 412729 SPDYClient needs a Promise-based connect() method
  + 412829 Allow any mappings from web-default.xml to be overridden by web.xml
  + 412830 Error Page match ServletException then root cause
@@ -2926,7 +2886,6 @@ jetty-9.1.0.M0 - 16 September 2013
  + 413484 setAttribute in nosql session management better handles _dirty status
  + 413531 Introduce pluggable transports for HttpClient
  + 413684 deprecated unsafe alias checkers
- + 413737 hide stacktrace in ReferrerPushStrategyTest
  + 413901 isAsyncStarted remains true while original request is dispatched
  + 414167 WebSocket handshake upgrade from FireFox fails due to keep-alive
  + 414431 Avoid debug NPE race
@@ -2948,13 +2907,10 @@ jetty-9.1.0.M0 - 16 September 2013
  + 415131 Avoid autoboxing on debug
  + 415192 <jsp-file> maps to JspPropertyGroupServlet instead of JspServlet
  + 415194 Deployer gives management of context to context collection
- + 415302 
  + 415314 Jetty should not commit response on output if <
    Response.setBufferSize() bytes are written
  + 415330 Avoid multiple callbacks at EOF
  + 415401 WebAppProvider: override XmlConfiguration.initializeDefaults
- + 415548 migrate ProxyHTTPToSPDYTest to use HttpClient to avoid intermittent
-   NPE part 2
  + 415605 fix status code logging for async requests
  + 415641 Remove remaining calls to deprecated HttpTranspoert.send
  + 415656 SPDY - add IdleTimeout per Stream functionality
@@ -2965,8 +2921,6 @@ jetty-9.1.0.M0 - 16 September 2013
  + 415825 fix stop support in modular start setup
  + 415826 modules initialised with --add-to-start and --add-to-startd
  + 415827 jetty-start / update --help text for new command line options
- + 415830 jetty-start / add more TestUseCases for home + base + modules
-   configurations
  + 415831 rename ini keyword from MODULES= to --module=
  + 415832 jetty-start / fix ClassNotFound exception when starting from empty
    base directory
@@ -2996,10 +2950,8 @@ jetty-9.1.0.M0 - 16 September 2013
  + 416597 Allow classes and jars on the webappcontext extraclasspath to be
    scanned for annotations
  + 416663 Content-length set by resourcehandler
- + 416674 run all jetty-ant tests on random ports
  + 416679 Change warning to debug if no transaction manager present
  + 416680 remove uncovered constraint warning
- + 416681 Remove unnecessary security constraints in test-jetty-webapp
  + 416763 WebSocket / Jsr Session.getPathParameters() is empty
  + 416764 WebSocket / Jsr Session.getRequestURI() is missing scheme + host +
    port + query parameters
@@ -3009,7 +2961,6 @@ jetty-9.1.0.M0 - 16 September 2013
  + 417022 Request attribute access to Server,HttpChannel & HttpConnection
  + 417023 Add Default404Servlet if no default servlet set
  + 417108 demo-base uses HTTPS
- + 417109 Demo / Jaas test fails to find etc/login.conf
  + 417110 Demo / html body end tag missing in authfail.html
  + 417111 Demo / login with admin/admin fails
  + 417133 WebSocket / deflate-frame should accumulate decompress byte buffers
@@ -3071,11 +3022,6 @@ jetty-9.0.5.v20130815 - 15 August 2013
    defaulting to security-role if no matching ref
  + 408235 SPDYtoHTTP proxy fix: remove hop headers from upstream server
  + 409028 Jetty HttpClient does not work with proxy CONNECT method
- + 409282 fix intermittently failing MaxConcurrentStreamTest
- + 409845 add test that makes sure that DataFrameGenerator correctly prepends
-   the header information
- + 410498 ignore type of exception in
-   GoAwayTest.testDataNotProcessedAfterGoAway
  + 410668 HTTP client should support the PATCH method
  + 410800 Make RewritePatternRule queryString aware
  + 410805 StandardSession: remove all frameBytes for a given stream from queue
@@ -3095,8 +3041,7 @@ jetty-9.0.5.v20130815 - 15 August 2013
  + 412318 HttpChannel fix multiple calls to _transport.completed() if handle()
    is called multiple times while the channel is COMPLETED
  + 412418 HttpTransportOverSPDY fix race condition while sending push streams
-   that could cause push data not to be sent. Fixes intermittent test issues in
-   ReferrerPushStrategyTest
+   that could cause push data not to be sent.
  + 412442 Avoid connection timeout after FIN-FIN close
  + 412466 Improved search for unset JETTY_HOME
  + 412608 EOF Chunk not sent on inputstream static content
@@ -3153,21 +3098,12 @@ jetty-9.0.4.v20130625 - 25 June 2013
    subclassing
  + 397193 MongoSessionManager refresh updates last access time
  + 398467 Servlet 3.1 Non Blocking IO
- + 400503 WebSocket - squelch legitimate Exceptions during testing to avoid
-   false positives
  + 401027 javadoc JMX annotations
  + 404508 enable overlay deployer
  + 405188 HTTP 1.0 with GET returns internal IP address
  + 405313 Websocket client SSL hostname verification is broken, always defaults
    to raw IP as String
- + 406759 supressed stacktrace in ReferrerPushStrategyTest
  + 406923 Accept CRLF or LF but not CR as line termination
- + 407246 Test harness checked results in callbacks ignored
- + 407325 Test Failure:
-   org.eclipse.jetty.servlets.EventSourceServletTest.testEncoding
- + 407326 Test Failure:
-   org.eclipse.jetty.client.HttpClientStreamTest.testInputStreamResponseListenerFailedBeforeResponse[0].
- + 407342 ReloadedSessionMissingClassTest uses class compiled with jdk7
  + 407386 Cookies not copied in ServletWebSocketRequest
  + 407469 Method parameters for @OnWebSocketError should support Throwable
  + 407470 Javadoc for @OnWebSocketFrame incorrectly references WebSocketFrame
@@ -3224,10 +3160,6 @@ jetty-9.0.4.v20130625 - 25 June 2013
    IDs
  + 409684 Ids and properties not set for execution of jetty xml config files
    with mvn plugin
- + 409796 fix intermittent test issue in
-   ReferrerPushStrategy.testResourceOrder. Happened when the client got closed
-   before the server finished sending all data frames. Client waits now until
-   all data is received.
  + 409801 Jetty should allow webdefault to be specified using a relative
    location when running in OSGi
  + 409842 Suspended request completed by a request thread does not set read
@@ -3237,15 +3169,12 @@ jetty-9.0.4.v20130625 - 25 June 2013
  + 409978 Websocket shouldn't create HttpSession if not present
  + 410083 Jetty clients submits incomplete URL to proxy
  + 410098 inject accept-encoding header for all http requests through SPDY as
-   SPDY clients MUST support spdy. Also remove two new tests that have been to
-   implementation agnostic and not needed anymore due to recent code changes
+   SPDY clients MUST support spdy
  + 410175 WebSocketSession#isSecure() doesn't return true for SSL session on
    the server side
  + 410246 HttpClient with proxy does not tunnel HTTPS requests
  + 410337 throw EofException instead of EOFException in HttpOutput.write() if
    HttpOutpyt is closed
- + 410341 suppress stacktraces that happen during test setup shutdown after
-   successful test run
  + 410370 WebSocketCreator.createWebSocket() should use servlet specific
    parameters
  + 410372 Make SSL client certificate information available to server
@@ -3283,7 +3212,6 @@ jetty-9.0.4.v20130625 - 25 June 2013
 
 jetty-9.0.3.v20130506 - 06 May 2013
  + 404010 fix cast exception in mongodb session manager
- + 404911 WebSocketCloseTest fails spuriously
  + 405281 allow filemappedbuffers to not be used
  + 405327 Modular Start.ini
  + 405530 Wrap AsyncContext to throw ISE after complete
@@ -3358,8 +3286,6 @@ jetty-9.0.1.v20130408 - 08 April 2013
  + 402735 jetty.sh to support status which is == check
  + 402757 WebSocket client module can't be used with WebSocket server module in
    the same WAR.
- + 402833 Test harness for global error page and hide exception message from
-   reason string
  + 402844 STOP.PORT & STOP.KEY behaviour has changed
  + 402982 Premature initialization of Servlets
  + 402984 WebSocket Upgrade must honor case insensitive header fields in
@@ -3450,7 +3376,6 @@ jetty-9.0.0.v20130308 - 08 March 2013
 jetty-8.1.12.v20130726 - 26 July 2013
  + 396706 CGI support parameters
  + 397193 MongoSessionManager refresh updates last access time
- + 407342 ReloadedSessionMissingClassTest uses class compiled with jdk7
  + 408529 Etags set in 304 response
  + 408600 set correct jetty.url in all pom files
  + 408642 setContentType from addHeader
@@ -3488,7 +3413,6 @@ jetty-8.1.12.v20130726 - 26 July 2013
 jetty-7.6.12.v20130726 - 26 July 2013
  + 396706 CGI support parameters
  + 397193 MongoSessionManager refresh updates last access time
- + 407342 ReloadedSessionMissingClassTest uses class compiled with jdk7
  + 408529 Etags set in 304 response
  + 408600 set correct jetty.url in all pom files
  + 408642 setContentType from addHeader
@@ -3577,8 +3501,6 @@ jetty-8.1.10.v20130312 - 12 March 2013
    server is stopped
  + 402485 reseed secure random
  + 402735 jetty.sh to support status which is == check
- + 402833 Test harness for global error page and hide exception message from
-   reason string
 
 jetty-7.6.11.v20130520 - 20 May 2013
  + 402844 STOP.PORT & STOP.KEY behaviour has changed
@@ -3634,8 +3556,6 @@ jetty-7.6.10.v20130312 - 12 March 2013
    server is stopped
  + 402485 reseed secure random
  + 402735 jetty.sh to support status which is == check
- + 402833 Test harness for global error page and hide exception message from
-   reason string
 
 jetty-9.0.0.RC2 - 24 February 2013
  + Fix etc/jetty.xml TimerScheduler typo that is preventing normal startup
@@ -3703,15 +3623,12 @@ jetty-9.0.0.RC0 - 01 February 2013
  + 393933 remove deprecated classes/methods and consolidate some static methods
    to SslContextFactory
  + 393968 fix typo in javadoc
- + 394541 remove continuation jar from distro, add as dep to test-jetty-webapp
  + 395232 UpgradeRequest object passed to createWebSocket() has null Session
  + 395444 Disabling Websocket Compress Extensions (not working with Chrome /
    deflate problem)
- + 396428 Test for WebSocket masking on client fragments per RFC 6455 Sec 5.1
  + 396574 add JETTY_HOME as a location for pid to be found
  + 396606 make spdy proxy capable of receiving SPDY and talk HTTP to the
    upstream server
- + 397168 backed of test timing
  + 397769 TimerScheduler does not relinquish cancelled tasks
  + 398872 SslConnection should not be notified of idle timeouts. First
    solution. Merge branch 'ssl_idle_timeout_ignored'.
@@ -3731,7 +3648,6 @@ jetty-9.0.0.RC0 - 01 February 2013
    information
  + 399566 Running org.eclipse.jetty.server.session.MaxInactiveMigrationTest
    produces stack trace
- + 399568 OSGi tests can't find websocket classes
  + 399576 Server dumpStdErr throws exception if server is stopping
  + 399669 Remove WebSocketConnection in favor of websocket.api.Session
  + 399689 Websocket RFC6455 extension handshake fails if server doesn't have
@@ -3779,7 +3695,6 @@ jetty-9.0.0.M4 - 21 December 2012
  + 394211 spdy: Expose RemoteServerAddress and LocalServerAddress in
    StandardSession
  + 394294 Start web-bundles started before jetty
- + 394370 Add integration test for client resetting SPDY push SYN's
  + 394514 Preserve URI parameters in sendRedirect
  + 394552 HEAD requests don't work for jetty-client
  + 394719 remove regex from classpath matching
@@ -3787,8 +3702,6 @@ jetty-9.0.0.M4 - 21 December 2012
    has saved the session
  + 394839 Allow multipart mime with no boundary
  + 394854 optimised promise implementation
- + 394870 Make enablement of remote access to test webapp configurable in
-   override-web.xml
  + 395168 fix unavailable attributes when return type has annotation on super
    class
  + 395215 Multipart mime with just LF and no CRLF: add test for legacy filter
@@ -3798,7 +3711,7 @@ jetty-9.0.0.M4 - 21 December 2012
  + 395313 HttpTransportOverSPDY.send() does not rethrow exceptions, but call
    Callback.failed() only
  + 395314 Add missing flush() call after StandardSession.complete() has been
-   called. Some test cleanup.
+   called. 
  + 395344 Move JSR-356 (Java WebSocket API) work off to Jetty 9.1.x
  + 395380 add ValidUrlRule to jetty-rewrite
  + 395394 allow logging from boot classloader
@@ -3818,20 +3731,15 @@ jetty-9.0.0.M4 - 21 December 2012
    it should only be a systemclass
  + 396473 JettyWebXMlConfiguration does not reset serverclasses
  + 396474 add websocket server classes to jetty-maven-plugin classpath
- + 396475 Remove unneeded websocket-server dependency from test-jetty-webapp
- + 396518 Websocket AB Tests should test for which side disconnected and
-   closed.wasClean
  + 396687 missing jetty-io dependency in jetty-servlets
  + JETTY-796 jetty ant plugin improvements
 
 jetty-9.0.0.M3 - 20 November 2012
  + 391623 Add option to --stop to wait for target jetty to stop
- + 392237 Port test-integration to jetty-9
  + 392492 expect headers only examined for requests>=HTTP/1.1
  + 392850 ContextLoaderListener not called in 9.0.0.M1 and M2
  + 393075 1xx, 204, 304 responses ignore headers that suggest content
  + 393832 start connectors last
- + 393947 additional tests
  + 394143 add jetty-all aggregate via release profile
  + 394144 add jetty-jaspi
 
@@ -3850,20 +3758,16 @@ jetty-8.1.9.v20130131 - 31 January 2013
  + 393158 java.lang.IllegalStateException when sending an empty InputStream
  + 393220 remove dead code from ServletHandler and log ServletExceptions in
    warn instead of debug
- + 393947 additional tests
  + 393968 fix typo in javadoc
  + 394294 A web-bundle started before jetty-osgi should be deployed as a webapp
    when jetty-osgi starts
  + 394514 Preserve URI parameters in sendRedirect
- + 394541 remove continuation jar from distro, add as dep to test-jetty-webapp
  + 394719 remove regex from classpath matching
  + 394811 Make JAASLoginService log login failures to DEBUG instead of WARN
    Same for some other exceptions.
  + 394829 Session can not be restored after SessionManager.setIdleSavePeriod
    has saved the session
  + 394839 Allow multipart mime with no boundary
- + 394870 Make enablement of remote access to test webapp configurable in
-   override-web.xml
  + 395215 Multipart mime with just LF and no CRLF
  + 395380 add ValidUrlRule to jetty-rewrite
  + 395394 allow logging from boot classloader
@@ -3900,10 +3804,8 @@ jetty-7.6.9.v20130131 - 31 January 2013
  + 393075 1xx 204 and 304 ignore all headers suggesting content
  + 393220 remove dead code from ServletHandler and log ServletExceptions in
    warn instead of debug
- + 393947 additional tests
  + 393968 fix typo in javadoc
  + 394514 Preserve URI parameters in sendRedirect
- + 394541 remove continuation jar from distro, add as dep to test-jetty-webapp
  + 394719 remove regex from classpath matching
  + 394811 Make JAASLoginService log login failures to DEBUG instead of WARN
    Same for some other exceptions.
@@ -3933,7 +3835,6 @@ jetty-7.6.9.v20130131 - 31 January 2013
  + 394215 Scheduled tasks throwing exceptions kill java.util.Timer thread
  + 394232 add jetty-ant into jetty9
  + 394357 Make JarResource constructors protected
- + 394370 Add unit tests for HttpTransportOverSPDY.send()
  + 394383 add logging of the SSLEngine
  + 394545 Add jetty-jaas dependency to jetty-maven-plugin
  + 394671 Fix setting loglevel on commandline, organize import, fix javadoc
@@ -3941,11 +3842,8 @@ jetty-7.6.9.v20130131 - 31 January 2013
    NPE
 
 jetty-9.0.0.M2 - 06 November 2012
- + 371170 MongoSessionManager LastAccessTimeTest fails
  + 391877 org.eclipse.jetty.webapp.FragmentDescriptor incorrectly reporting
    duplicate others for after ordering
- + 392237 Split jaas from jetty-plus into jetty-jaas and port the
-   test-jaas-webapp from codehaus
  + 392239 Allow no error-code or exception for error-pages
  + 392304 fixed intermittent client SSL failure. Correctly compact in flip2fill
  + 392525 Add option to --stop-wait to specify timeout
@@ -3970,7 +3868,6 @@ jetty-9.0.0.M2 - 06 November 2012
  + JETTY-1550 virtual WEB-INF not created if project has overlays
 
 jetty-8.1.8.v20121106 - 06 November 2012
- + 371170 MongoSessionManager LastAccessTimeTest fails
  + 388675 Non utf8 encoded query strings not decoded to parameter map using
    queryEncoding
  + 388706 Avoid unnecessary indirection through Charset.name
@@ -4016,7 +3913,6 @@ jetty-8.1.8.v20121106 - 06 November 2012
    web-app/jsp-config/jsp-property-group/default-content-type
 
 jetty-7.6.8.v20121106 - 06 November 2012
- + 371170 MongoSessionManager LastAccessTimeTest fails
  + 388675 Non utf8 encoded query strings not decoded to parameter map using
    queryEncoding
  + 389686 Fix reference to org.eclipse.jetty.util.log.stderr.LONG system
